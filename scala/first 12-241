@@ -1,0 +1,33 @@
+object Main extends App {
+  val nums = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+  val minnum = nums.min
+  println(s"Мінімальне число: $minnum")
+
+  val maxnum = nums.max
+  println(s"Максимальне число: $maxnum")
+
+  val lessnum5 = nums.filter(_ < 5)
+  println(s"Числа менше 5: $lessnum5")
+
+  val num5 = nums.find(_ % 5 == 0)
+  num5 match {
+    case Some(num) => println(s"Перше число, яке ділиться на 5: $num")
+    case None      => println("У списку немає чисел, які діляться на 5 без залишку.")
+  }
+
+  val find5 = nums.contains(5)
+  println(s"Список містить число 5: $find5")
+
+  val firstnum = nums.head
+  println(s"Перший елемент у списку: $numfirst")
+
+  val tailList = nums.tail
+  println(s"Список без першого елементу: $tailList")
+
+  val averagenum = nums.sum.toDouble / nums.length
+  println(s"Середнє арифметичне: $average")
+
+  val productnum = nums.product
+  println(s"Добуток всіх чисел: $product")
+}

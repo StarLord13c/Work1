@@ -1,0 +1,49 @@
+case class Human(name: String, age: Int)
+
+class ListHuman {
+  private var people: List[Human] = List()
+
+  def addHuman(name: String, age: Int): Unit = 
+  {
+    val newHuman = Human(name, age)
+    people = newHuman :: people
+  }
+  def deleteHumanByName(name: String): Unit = 
+  {
+    people = people.filterNot(_.name == name)
+  }
+  def findHumanByName(name: String): Option[Human] = 
+  {
+    people.find(_.name == name)
+  }
+  def filterHumans(predicate: Human => Boolean): List[Human] = 
+  {
+    people.filter(predicate)
+  }
+  def printAllHumans(): Unit = 
+  {
+    for (human <- people) {
+      println(s"Ім'я: ${human.name}, Вік: ${human.age}")
+    }
+  }
+}
+
+object Main extends App {
+  val listHuman = new ListHuman()
+  listHuman.addHuman("Сергій", 19)
+  listHuman.addHuman("Сашко", 18)
+  listHuman.addHuman("Владислав", 22)
+  println("Усі люди:")
+  listHuman.printAllHumans()
+
+  val foundHuman = listHuman.findHumanByName("Сашко")
+  foundHuman match {
+    case Some(human) => println(s"Знайдено: ${human.name}, Вік: ${human.age}")
+    case None        => println("Людину не знайдено.")
+  }
+
+  listHuman.deleteHumanByName("Владислав")
+  val youngHuman = listHuman.filterHumans(_.age < 30)
+  println("Люди молодші за 30 років:")
+  listHuman.printAllHumans()
+}
